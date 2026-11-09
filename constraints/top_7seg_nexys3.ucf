@@ -1,0 +1,49 @@
+## =====================================================================
+##  Contraintes pour top_7seg sur DIGILENT NEXYS 3 (Spartan-6 XC6SLX16)
+##  !!! Horloge de la Nexys 3 = 100 MHz -> dans top_7seg.vhd mettre
+##      CLK_FREQ := 100000000  (sinon le CPU tourne a 2 Hz au lieu de 1 Hz)
+##  Afficheurs : segments ET anodes actifs a '0' -> SEG_ACTIF_BAS = true,
+##  AN_ACTIF_BAS = true. Boutons actifs a '1' -> *_ACTIF_BAS = false.
+##  Pour une AUTRE carte : recopier les LOC depuis le "Master UCF" ou
+##  le manuel de la carte (les noms de NET ci-dessous ne changent pas).
+## =====================================================================
+
+## Horloge 100 MHz
+NET "clk" LOC = "V10" | IOSTANDARD = "LVCMOS33";
+NET "clk" TNM_NET = "sys_clk";
+TIMESPEC "TS_sys_clk" = PERIOD "sys_clk" 10 ns HIGH 50%;
+
+## Boutons : BTNS (centre) = reset, BTNR (droite) = pas a pas
+NET "btn_reset" LOC = "B8" | IOSTANDARD = "LVCMOS33";
+NET "btn_pas"   LOC = "D9" | IOSTANDARD = "LVCMOS33";
+
+## Interrupteurs : SW0/SW1 = choix affichage, SW7 = mode (0 auto, 1 pas a pas)
+NET "sw_sel<0>" LOC = "T10" | IOSTANDARD = "LVCMOS33";
+NET "sw_sel<1>" LOC = "T9"  | IOSTANDARD = "LVCMOS33";
+NET "sw_mode"   LOC = "T5"  | IOSTANDARD = "LVCMOS33";
+
+## Afficheur 7 segments : seg<0>=a ... seg<6>=g, dp = point
+NET "seg<0>" LOC = "T17" | IOSTANDARD = "LVCMOS33";
+NET "seg<1>" LOC = "T18" | IOSTANDARD = "LVCMOS33";
+NET "seg<2>" LOC = "U17" | IOSTANDARD = "LVCMOS33";
+NET "seg<3>" LOC = "U18" | IOSTANDARD = "LVCMOS33";
+NET "seg<4>" LOC = "M14" | IOSTANDARD = "LVCMOS33";
+NET "seg<5>" LOC = "N14" | IOSTANDARD = "LVCMOS33";
+NET "seg<6>" LOC = "L14" | IOSTANDARD = "LVCMOS33";
+NET "dp"     LOC = "M13" | IOSTANDARD = "LVCMOS33";
+
+## Selection des digits : an<0> = digit de droite (poids faible)
+NET "an<0>" LOC = "N16" | IOSTANDARD = "LVCMOS33";
+NET "an<1>" LOC = "N15" | IOSTANDARD = "LVCMOS33";
+NET "an<2>" LOC = "P18" | IOSTANDARD = "LVCMOS33";
+NET "an<3>" LOC = "P17" | IOSTANDARD = "LVCMOS33";
+
+## LEDs : LD2..LD0 = etat FSM, LD3 = STP, LD7..LD4 = opcode
+NET "led<0>" LOC = "U16" | IOSTANDARD = "LVCMOS33";
+NET "led<1>" LOC = "V16" | IOSTANDARD = "LVCMOS33";
+NET "led<2>" LOC = "U15" | IOSTANDARD = "LVCMOS33";
+NET "led<3>" LOC = "V15" | IOSTANDARD = "LVCMOS33";
+NET "led<4>" LOC = "M11" | IOSTANDARD = "LVCMOS33";
+NET "led<5>" LOC = "N11" | IOSTANDARD = "LVCMOS33";
+NET "led<6>" LOC = "R11" | IOSTANDARD = "LVCMOS33";
+NET "led<7>" LOC = "T11" | IOSTANDARD = "LVCMOS33";

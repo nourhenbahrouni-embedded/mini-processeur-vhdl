@@ -1,0 +1,49 @@
+## =====================================================================
+##  MODELE de contraintes pour top_lcd (LCD 16x2 HD44780 / LCD1602)
+##  Remplacer chaque ?? par la broche FPGA indiquee dans le manuel
+##  (ou le schema) de VOTRE carte, puis enlever le # en debut de ligne.
+##  Une broche non contrainte = ISE la place au hasard = rien ne marche.
+##
+##  Rappels materiel LCD1602 :
+##   - regler le potentiometre de CONTRASTE (V0) : sans lui l'ecran
+##     reste vide meme si tout est bon ;
+##   - RW doit etre relie a la broche lcd_rw (ou directement a la masse) ;
+##   - mode 8 bits : D0..D7 tous cables. Si la carte ne cable que
+##     D4..D7 (mode 4 bits) il faut un autre controleur.
+## =====================================================================
+
+## Horloge de la carte (mettre la bonne periode : 20 ns = 50 MHz, 10 ns = 100 MHz)
+## et reporter la frequence dans le generic CLK_FREQ de top_lcd.vhd
+#NET "clk" LOC = "??" | IOSTANDARD = "LVCMOS33";
+#NET "clk" TNM_NET = "sys_clk";
+#TIMESPEC "TS_sys_clk" = PERIOD "sys_clk" 20 ns HIGH 50%;
+
+## Boutons (si un bouton vaut 0 quand on appuie : *_ACTIF_BAS => true)
+#NET "btn_reset" LOC = "??" | IOSTANDARD = "LVCMOS33";
+#NET "btn_pas"   LOC = "??" | IOSTANDARD = "LVCMOS33";
+
+## Interrupteur de mode (0 = automatique, 1 = pas a pas)
+#NET "sw_mode"   LOC = "??" | IOSTANDARD = "LVCMOS33";
+
+## LCD
+#NET "lcd_rs"    LOC = "??" | IOSTANDARD = "LVCMOS33";
+#NET "lcd_rw"    LOC = "??" | IOSTANDARD = "LVCMOS33";
+#NET "lcd_e"     LOC = "??" | IOSTANDARD = "LVCMOS33";
+#NET "lcd_db<0>" LOC = "??" | IOSTANDARD = "LVCMOS33";
+#NET "lcd_db<1>" LOC = "??" | IOSTANDARD = "LVCMOS33";
+#NET "lcd_db<2>" LOC = "??" | IOSTANDARD = "LVCMOS33";
+#NET "lcd_db<3>" LOC = "??" | IOSTANDARD = "LVCMOS33";
+#NET "lcd_db<4>" LOC = "??" | IOSTANDARD = "LVCMOS33";
+#NET "lcd_db<5>" LOC = "??" | IOSTANDARD = "LVCMOS33";
+#NET "lcd_db<6>" LOC = "??" | IOSTANDARD = "LVCMOS33";
+#NET "lcd_db<7>" LOC = "??" | IOSTANDARD = "LVCMOS33";
+
+## LEDs (facultatif) : led<2:0> = etat, led<3> = STP, led<7:4> = opcode
+#NET "led<0>" LOC = "??" | IOSTANDARD = "LVCMOS33";
+#NET "led<1>" LOC = "??" | IOSTANDARD = "LVCMOS33";
+#NET "led<2>" LOC = "??" | IOSTANDARD = "LVCMOS33";
+#NET "led<3>" LOC = "??" | IOSTANDARD = "LVCMOS33";
+#NET "led<4>" LOC = "??" | IOSTANDARD = "LVCMOS33";
+#NET "led<5>" LOC = "??" | IOSTANDARD = "LVCMOS33";
+#NET "led<6>" LOC = "??" | IOSTANDARD = "LVCMOS33";
+#NET "led<7>" LOC = "??" | IOSTANDARD = "LVCMOS33";
